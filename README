@@ -1,0 +1,3 @@
+npx @tailwindcss/cli -i ./css/tailwind.css -o ./css/tailwind-build.css --watch
+
+sass sass/scss/main.scss sass/output.css --no-source-map

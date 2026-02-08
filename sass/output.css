@@ -1,0 +1,292 @@
+@font-face {
+  font-family: "inter";
+  src: url("/fuentes/Inter/Inter-VariableFont_opsz,wght.ttf");
+}
+body {
+  background: #fffbff;
+  font-family: "inter", sans-serif;
+  color: #111;
+}
+
+.header {
+  width: 100%;
+  height: 70px;
+  background: #fffbff;
+  border-bottom: 1px solid #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-logo {
+  height: 50px;
+}
+
+.header-icon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+.header-icon.left {
+  position: absolute;
+  left: 15px;
+}
+
+.header-right {
+  position: absolute;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.menu-lateral {
+  width: 240px;
+  height: 100%;
+  background: #fffbff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  border-right: 1px solid #111;
+  transform: translateX(-100%);
+  transition: 0.3s ease;
+  z-index: 20;
+}
+.menu-lateral.open {
+  transform: translateX(0);
+}
+
+.cerrar-menu {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.menu-item {
+  margin-bottom: 15px;
+}
+.menu-item .categoria {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.menu-item .categoria.active {
+  color: #ff5722;
+}
+.menu-item .submenu {
+  margin-left: 10px;
+  margin-top: 5px;
+  display: none;
+  flex-direction: column;
+}
+.menu-item .submenu.show {
+  display: flex;
+}
+.menu-item .submenu a {
+  padding: 4px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.carrito-contenedor {
+  width: min(1000px, 92%);
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.carrito-contenedor .btn-volver-inicio {
+  background: transparent;
+  color: #111;
+  border: 2px solid #111;
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+.carrito-contenedor .btn-volver-inicio:hover {
+  background: #ff5722;
+  color: #fffbff;
+}
+.carrito-contenedor .btn-volver-inicio {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  width: fit-content;
+  margin-bottom: 20px;
+  transition: all 0.2s ease;
+}
+.carrito-contenedor .btn-volver-inicio:hover {
+  transform: translateX(-3px);
+}
+.carrito-contenedor .titulo-carrito {
+  font-size: 2rem;
+  margin: 0 0 20px 0;
+  letter-spacing: 0.5px;
+}
+.carrito-contenedor #carritoProductos {
+  display: grid;
+  gap: 16px;
+}
+.carrito-contenedor .producto-card {
+  background: #fffbff;
+  border: 1px solid #111;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+.carrito-contenedor .producto-card .titulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.carrito-contenedor .producto-card .titulo span {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.carrito-contenedor .producto-card .titulo .eliminar {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+.carrito-contenedor .producto-card .titulo .eliminar:hover {
+  opacity: 1;
+}
+.carrito-contenedor .producto-card .imagen {
+  display: flex;
+  justify-content: center;
+}
+.carrito-contenedor .producto-card .imagen img {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid #111;
+}
+.carrito-contenedor .producto-card .talla-precio .btn-linea {
+  background: transparent;
+  color: #003366;
+  border: 1px solid #ff5722;
+  border-radius: 12px;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+.carrito-contenedor .producto-card .talla-precio .btn-linea:hover {
+  background: #ff5722;
+  color: #fffbff;
+}
+.carrito-contenedor .producto-card .talla-precio .btn-linea {
+  width: 100%;
+  text-align: left;
+}
+.carrito-contenedor .producto-card .color {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.carrito-contenedor .producto-card .color label {
+  font-weight: 600;
+}
+.carrito-contenedor .producto-card .color .color-preview {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fffbff;
+}
+.carrito-contenedor .producto-card .unidades {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.carrito-contenedor .producto-card .unidades label {
+  font-weight: 600;
+}
+.carrito-contenedor .producto-card .unidades input[type=number] {
+  width: 90px;
+  padding: 10px;
+  border: 1px solid #ff5722;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+}
+.carrito-contenedor .producto-card .unidades input[type=number]:focus {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+.carrito-contenedor .producto-card .subtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid #111;
+  padding-top: 12px;
+  margin-top: 4px;
+}
+.carrito-contenedor .producto-card .subtotal span {
+  font-weight: 800;
+}
+.carrito-contenedor #totalCarrito.subtotal {
+  background: #fffbff;
+  border: 1px solid #111;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  padding: 16px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+}
+.carrito-contenedor #totalCarrito.subtotal span {
+  font-weight: 900;
+}
+.carrito-contenedor .btn-finalizar {
+  background: #ff5722;
+  color: #fffbff;
+  border: 1px solid #111;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+.carrito-contenedor .btn-finalizar:hover {
+  opacity: 0.9;
+}
+.carrito-contenedor .btn-finalizar {
+  width: 100%;
+  margin-top: 16px;
+}
+@media (min-width: 768px) {
+  .carrito-contenedor #carritoProductos {
+    gap: 20px;
+  }
+  .carrito-contenedor .producto-card {
+    grid-template-columns: 1fr 260px;
+    align-items: start;
+  }
+  .carrito-contenedor .producto-card .imagen {
+    order: 2;
+  }
+  .carrito-contenedor .producto-card .titulo,
+  .carrito-contenedor .producto-card .talla-precio,
+  .carrito-contenedor .producto-card .color,
+  .carrito-contenedor .producto-card .unidades,
+  .carrito-contenedor .producto-card .subtotal {
+    order: 1;
+  }
+}

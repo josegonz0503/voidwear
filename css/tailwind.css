@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fuentes/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@theme {
+  --color-naranja: #eca400;
+  --color-negro: #14110f;
+  --color-azul: #006992;
+  --color-blanco: #fffbff;
+
+  --font-principal: Inter, sans-serif;
+
+  --shadow-suave: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+  --radius-xl2: 1rem;
+}
+
+
+
+.bg-naranja  { background-color: var(--color-naranja); }
+.bg-negro    { background-color: var(--color-negro); }
+.bg-azul     { background-color: var(--color-azul); }
+.bg-blanco   { background-color: var(--color-blanco); }
+
+.text-naranja { color: var(--color-naranja); }
+.text-negro   { color: var(--color-negro); }
+.text-azul    { color: var(--color-azul); }
+.text-blanco  { color: var(--color-blanco); }
+
+.border-naranja { border-color: var(--color-naranja); }
+.border-negro   { border-color: var(--color-negro); }
+.border-azul    { border-color: var(--color-azul); }
+.border-blanco  { border-color: var(--color-blanco); }
+
+
+.review-card {
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-negro);
+  padding: 1rem;
+  border-radius: var(--radius-xl2);
+  box-shadow: var(--shadow-suave);
+  max-width: 260px;
+}

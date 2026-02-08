@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "nombre": "Camiseta Amanecer",
+    "imagen": "imgs/slide1.jpg",
+    "precios": [
+      {
+        "talla": "XS",
+        "precio": 19.99
+      },
+      {
+        "talla": "S",
+        "precio": 21.99
+      },
+      {
+        "talla": "M",
+        "precio": 23.99
+      },
+      {
+        "talla": "L",
+        "precio": 25.99
+      },
+      {
+        "talla": "XL",
+        "precio": 27.99
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nombre": "Sudadera Nocturna",
+    "imagen": "imgs/slide2.jpg",
+    "precios": [
+      {
+        "talla": "XS",
+        "precio": 39.99
+      },
+      {
+        "talla": "S",
+        "precio": 41.99
+      },
+      {
+        "talla": "M",
+        "precio": 43.99
+      },
+      {
+        "talla": "L",
+        "precio": 45.99
+      },
+      {
+        "talla": "XL",
+        "precio": 47.99
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nombre": "Chaqueta Eclipse",
+    "imagen": "imgs/slide3.jpg",
+    "precios": [
+      {
+        "talla": "XS",
+        "precio": 49.99
+      },
+      {
+        "talla": "S",
+        "precio": 51.99
+      },
+      {
+        "talla": "M",
+        "precio": 53.99
+      },
+      {
+        "talla": "L",
+        "precio": 55.99
+      },
+      {
+        "talla": "XL",
+        "precio": 57.99
+      }
+    ]
+  }
+]

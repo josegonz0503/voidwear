@@ -1,0 +1,44 @@
+@use "variables" as *;
+
+@mixin button(
+  $bg,
+  $fg: $blanco,
+  $border: 1px solid $negro,
+  $radius: $radius,
+  $padding: 14px,
+  $font-size: 18px,
+  $shadow: $shadow,
+  $hover-bg: null,
+  $hover-fg: null,
+  $hover-opacity: null
+) {
+  background: $bg;
+  color: $fg;
+  border: $border;
+  border-radius: $radius;
+  padding: $padding;
+  font-size: $font-size;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: $shadow;
+
+  &:hover {
+    @if $hover-bg != null { background: $hover-bg; }
+    @if $hover-fg != null { color: $hover-fg; }
+    @if $hover-opacity != null { opacity: $hover-opacity; }
+  }
+}
+
+@mixin card(
+  $bg: $blanco,
+  $border-color: $negro,
+  $radius: $radius,
+  $shadow: $shadow,
+  $padding: $space-4
+) {
+  background: $bg;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: $padding;
+}

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoidWear - Home</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <img class="icono menu-toggle" src="iconos/menu.png" alt="Menú">
+
+  <img class="logo" src="logos/normal.png" alt="Logo">
+
+  <div class="icons-header">
+    <img class="icono" src="iconos/perfil.png" alt="Perfil">
+    <img class="icono" src="iconos/carrito.png" alt="Carrito">
+  </div>
+</header>
+
+<nav class="menu-lateral" id="menuLateral">
+  <button class="cerrar-menu" id="cerrarMenu">×</button>
+
+  <div class="menu-item">
+    <p class="categoria">Mujer ▼</p>
+    <div class="submenu">
+      <a href="#">Camisetas</a>
+      <a href="#">Pantalones</a>
+      <a href="#">Chaquetas</a>
+      <a href="#">Accesorios</a>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <p class="categoria">Hombre ▼</p>
+    <div class="submenu">
+      <a href="#">Camisetas</a>
+      <a href="#">Pantalones</a>
+      <a href="#">Chaquetas</a>
+      <a href="#">Accesorios</a>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <p class="categoria">Niños ▼</p>
+    <div class="submenu">
+      <a href="#">Camisetas</a>
+      <a href="#">Pantalones</a>
+      <a href="#">Chaquetas</a>
+      <a href="#">Accesorios</a>
+    </div>
+  </div>
+
+  <a class="solo-link" href="#">Ofertas</a>
+</nav>
+
+<div class="busqueda">
+  <img class="icono" src="iconos/lupa.png" alt="Buscar">
+  <input type="text" id="searchBar" placeholder="Buscar productos">
+  <img class="icono filtro-toggle" src="iconos/filtro.png" alt="Filtro">
+</div>
+
+<div class="filtro-panel" id="filtroPanel">
+  <div class="filtro-contenido">
+    <h3>Filtrar por</h3>
+
+    <div class="filtro-grupo">
+      <h4>Precio</h4>
+      <label><input type="checkbox"> Menos de 20€</label>
+      <label><input type="checkbox"> 20€ - 40€</label>
+      <label><input type="checkbox"> Más de 40€</label>
+    </div>
+
+    <div class="filtro-grupo">
+      <h4>Categoría</h4>
+      <label><input type="checkbox"> Camisetas</label>
+      <label><input type="checkbox"> Sudaderas</label>
+      <label><input type="checkbox"> Chaquetas</label>
+    </div>
+
+    <div class="filtro-grupo">
+      <h4>Talla</h4>
+      <label><input type="checkbox"> XS</label>
+      <label><input type="checkbox"> S</label>
+      <label><input type="checkbox"> M</label>
+      <label><input type="checkbox"> L</label>
+      <label><input type="checkbox"> XL</label>
+    </div>
+
+    <button id="cerrarFiltro" class="btn-cerrar-filtro">Cerrar</button>
+  </div>
+</div>
+
+<div class="contenedor-pagina">
+  <aside class="sidebar" id="sidebarFiltros">
+    <h3>Filtros</h3>
+
+    <div class="sidebar-grupo">
+      <h4>Precio</h4>
+      <label><input type="checkbox" class="filtro" value="menos20"> Menos de 20€</label>
+      <label><input type="checkbox" class="filtro" value="20-40"> 20€ - 40€</label>
+      <label><input type="checkbox" class="filtro" value="mas40"> Más de 40€</label>
+    </div>
+
+    <div class="sidebar-grupo">
+      <h4>Categoría</h4>
+      <label><input type="checkbox" class="filtro" value="camisetas"> Camisetas</label>
+      <label><input type="checkbox" class="filtro" value="sudaderas"> Sudaderas</label>
+      <label><input type="checkbox" class="filtro" value="chaquetas"> Chaquetas</label>
+      <label><input type="checkbox" class="filtro" value="accesorios"> Accesorios</label>
+    </div>
+
+    <div class="sidebar-grupo">
+      <h4>Talla</h4>
+      <label><input type="checkbox" class="filtro" value="xs"> XS</label>
+      <label><input type="checkbox" class="filtro" value="s"> S</label>
+      <label><input type="checkbox" class="filtro" value="m"> M</label>
+      <label><input type="checkbox" class="filtro" value="l"> L</label>
+      <label><input type="checkbox" class="filtro" value="xl"> XL</label>
+    </div>
+
+    <button class="btn-aplicar-filtros">Aplicar Filtros</button>
+  </aside>
+
+  <main>
+
+    <section class="especial">
+      <div class="slider-header">
+        Aquí se explica la oferta o lo especial
+      </div>
+
+      <div class="slider-container">
+        <div class="slider" id="slider">
+
+          <div class="slide" data-id="1">
+            <img src="imgs/slide1.jpg" class="img-producto" alt="Camiseta Amanecer">
+
+            <div class="titulo-color">
+              <div class="titulo-producto">Camiseta Amanecer</div>
+              <img src="iconos/color.png" class="icono-color" alt="color">
+              <img src="iconos/color.png" class="icono-color" alt="color">
+              <img src="iconos/color.png" class="icono-color" alt="color">
+              <img src="iconos/color.png" class="icono-color" alt="color">
+              <img src="iconos/color.png" class="icono-color" alt="color">
+            </div>
+
+            <div class="slider-dots" id="dots"></div>
+
+            <div class="slider-inferior">
+              <div class="rating">★★★★☆ (34)</div>
+
+              <select class="select-talla" data-id="1">
+                <option value="19.99">XS - 19.99€</option>
+                <option value="21.99">S - 21.99€</option>
+                <option value="23.99">M - 23.99€</option>
+                <option value="25.99">L - 25.99€</option>
+                <option value="27.99">XL - 27.99€</option>
+              </select>
+
+              <button type="button">
+                <img class="add-carrito" src="iconos/add_cart.png" alt="Añadir al carrito">
+              </button>
+            </div>
+          </div>
+
+          <div class="slide" data-id="2">
+            <img src="imgs/slide2.jpg" class="img-producto" alt="Sudadera Nocturna">
+            <div class="titulo-producto">Sudadera Nocturna</div>
+
+            <div class="slider-dots" id="dots2"></div>
+
+            <div class="slider-inferior">
+              <div class="rating">★★★★★ (20)</div>
+
+              <select class="select-talla" data-id="2">
+                <option value="29.99">XS - 29.99€</option>
+                <option value="31.99">S - 31.99€</option>
+                <option value="33.99">M - 33.99€</option>
+                <option value="35.99">L - 35.99€</option>
+                <option value="37.99">XL - 37.99€</option>
+              </select>
+
+              <button type="button">
+                <img class="add-carrito" src="iconos/add_cart.png" alt="Añadir al carrito">
+              </button>
+            </div>
+          </div>
+
+          <div class="slide" data-id="3">
+            <img src="imgs/slide3.jpg" class="img-producto" alt="Chaqueta Estrella">
+            <div class="titulo-producto">Chaqueta Estrella</div>
+
+            <div class="slider-dots" id="dots3"></div>
+
+            <div class="slider-inferior">
+              <div class="rating">★★★★★ (12)</div>
+
+              <select class="select-talla" data-id="3">
+                <option value="49.99">XS - 49.99€</option>
+                <option value="52.99">S - 52.99€</option>
+                <option value="55.99">M - 55.99€</option>
+                <option value="58.99">L - 58.99€</option>
+                <option value="61.99">XL - 61.99€</option>
+              </select>
+
+              <button type="button">
+                <img class="add-carrito" src="iconos/add_cart.png" alt="Añadir al carrito">
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+      </div>
+    </section>
+
+    <section class="productos">
+      <h2>Novedades</h2>
+      <div class="grid-productos" id="productosGrid"></div>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/products-loader.js"></script>
+<script src="javascript.js"></script>
+
+</body>
+</html>

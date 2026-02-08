@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito - VoidWear</title>
+  <link rel="stylesheet" href="sass/output.css">
+</head>
+
+<body>
+
+<header class="header">
+  <img id="menuToggle" src="iconos/menu.png" alt="menu" class="header-icon left">
+
+  <a href="index.html">
+    <img src="logos/normal.png" alt="Logo" class="header-logo">
+  </a>
+
+  <div class="header-right">
+    <img src="iconos/perfil.png" class="header-icon">
+    <img src="iconos/carrito.png" class="header-icon">
+  </div>
+</header>
+
+<nav id="menuLateral" class="menu-lateral">
+
+  <button id="cerrarMenu" class="cerrar-menu">×</button>
+
+  <div class="menu-item">
+    <p class="categoria">Mujer ▼</p>
+    <div class="submenu">
+      <a>Camisetas</a>
+      <a>Pantalones</a>
+      <a>Chaquetas</a>
+      <a>Accesorios</a>
+    </div>
+  </div>
+
+  <div class="menu-item">
+    <p class="categoria">Hombre ▼</p>
+    <div class="submenu">
+      <a>Camisetas</a>
+      <a>Pantalones</a>
+      <a>Chaquetas</a>
+      <a>Accesorios</a>
+    </div>
+  </div>
+
+  <a class="solo-link">Ofertas</a>
+</nav>
+
+
+<main class="carrito-contenedor">
+
+<a href="index.html" class="btn-volver-inicio">← Volver a inicio</a>
+
+
+  <h1 class="titulo-carrito">Shopping Cart</h1>
+
+  <div id="carritoProductos"></div>
+
+  <div class="subtotal" id="totalCarrito"></div>
+
+  <button class="btn-finalizar">Finalizar compra</button>
+
+</main>
+
+<script>
+  const menuLateral = document.getElementById("menuLateral");
+  const menuToggle = document.getElementById("menuToggle");
+  const cerrarMenu = document.getElementById("cerrarMenu");
+
+  menuToggle.onclick = () => menuLateral.classList.add("open");
+  cerrarMenu.onclick = () => menuLateral.classList.remove("open");
+
+  document.querySelectorAll(".categoria").forEach(cat => {
+      cat.addEventListener("click", () => {
+          cat.nextElementSibling.classList.toggle("show");
+          cat.classList.toggle("active");
+      });
+  });
+
+
+  function obtenerCarrito() {
+    return JSON.parse(localStorage.getItem("carrito")) || [];
+  }
+
+  function guardarCarrito(carrito) {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }
+
+  function formatoEuro(n) {
+    return n.toFixed(2).replace(".", ",") + "€";
+  }
+
+  const contenedor = document.getElementById("carritoProductos");
+  const totalHTML = document.getElementById("totalCarrito");
+
+  function renderCarrito() {
+    const carrito = obtenerCarrito();
+    contenedor.innerHTML = "";
+
+    if (carrito.length === 0) {
+      contenedor.innerHTML = `<p style="text-align:center;">Tu carrito está vacío</p>`;
+      totalHTML.innerHTML = `Total: <span>${formatoEuro(0)}</span>`;
+      return;
+    }
+
+    let total = 0;
+
+    carrito.forEach((p, index) => {
+      const subtotal = (Number(p.precio) || 0) * (Number(p.cantidad) || 0);
+      total += subtotal;
+
+      contenedor.innerHTML += `
+        <div class="producto-card" data-index="${index}">
+          <div class="titulo">
+            <span>${p.nombre}</span>
+            <img class="eliminar" src="iconos/basura.png" alt="eliminar" data-index="${index}">
+          </div>
+
+          <div class="imagen">
+            <img src="${p.imagen}" alt="producto">
+          </div>
+
+          <div class="talla-precio">
+            <button class="btn-linea" type="button">Precio: ${formatoEuro(Number(p.precio) || 0)} ⬍</button>
+          </div>
+
+          <div class="color">
+            <label>Color:</label>
+            <div class="color-preview"></div>
+          </div>
+
+          <div class="unidades">
+            <label>Unidades:</label>
+            <input type="number" min="1" value="${Number(p.cantidad) || 1}" data-index="${index}">
+          </div>
+
+          <div class="subtotal">
+            Subtotal: <span>${formatoEuro(subtotal)}</span>
+          </div>
+        </div>
+      `;
+    });
+
+    totalHTML.innerHTML = `Total: <span>${formatoEuro(total)}</span>`;
+
+    document.querySelectorAll(".eliminar").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const i = Number(e.currentTarget.dataset.index);
+        const carrito = obtenerCarrito();
+        carrito.splice(i, 1);
+        guardarCarrito(carrito);
+        renderCarrito();
+      });
+    });
+
+    document.querySelectorAll(".unidades input[type='number']").forEach(inp => {
+      inp.addEventListener("change", (e) => {
+        const i = Number(e.currentTarget.dataset.index);
+        const nuevaCantidad = Math.max(1, Number(e.currentTarget.value) || 1);
+
+        const carrito = obtenerCarrito();
+        if (!carrito[i]) return;
+
+        carrito[i].cantidad = nuevaCantidad;
+        guardarCarrito(carrito);
+        renderCarrito();
+      });
+    });
+  }
+
+  renderCarrito();
+</script>
+
+</body>
+</html>

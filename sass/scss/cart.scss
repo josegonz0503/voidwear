@@ -1,0 +1,212 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+
+
+.carrito-contenedor {
+  width: min(1000px, 92%);
+  margin: 0 auto;
+  padding: $space-5 0;
+
+  .btn-volver-inicio {
+    @include button(
+      $bg: transparent,
+      $fg: $negro,
+      $border: 2px solid $negro,
+      $padding: 10px 18px,
+      $font-size: 15px,
+      $hover-bg: $naranja,
+      $hover-fg: $blanco
+    );
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    width: fit-content;
+
+    margin-bottom: $space-5;
+    transition: all 0.2s ease;
+
+    &:hover {
+      transform: translateX(-3px);
+    }
+  }
+
+
+  .titulo-carrito {
+    font-size: 2rem;
+    margin: 0 0 $space-5 0;
+    letter-spacing: 0.5px;
+  }
+
+  #carritoProductos {
+    display: grid;
+    gap: $space-4;
+  }
+
+  .producto-card {
+    @include card($bg: $blanco, $border-color: $negro, $padding: $space-4);
+
+    display: grid;
+    gap: $space-3;
+
+    .titulo {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: $space-3;
+
+      span {
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+
+      .eliminar {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+        opacity: 0.85;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .imagen {
+      display: flex;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+        border-radius: $radius;
+        border: 1px solid $negro;
+      }
+    }
+
+    .talla-precio {
+      .btn-linea {
+        @include button(
+          $bg: transparent,
+          $fg: $azul,
+          $border: 1px solid $naranja,
+          $padding: 10px,
+          $font-size: 16px,
+          $hover-bg: $naranja,
+          $hover-fg: $blanco
+        );
+
+        width: 100%;
+        text-align: left;
+      }
+    }
+
+    .color {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: $space-3;
+
+      label {
+        font-weight: 600;
+      }
+
+      .color-preview {
+        width: 22px;
+        height: 22px;
+        border: 1px solid $negro;
+        border-radius: 999px;
+        background: $blanco;
+      }
+    }
+
+    .unidades {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: $space-3;
+
+      label {
+        font-weight: 600;
+      }
+
+      input[type="number"] {
+        width: 90px;
+        padding: 10px;
+        border: 1px solid $naranja;
+        border-radius: $radius;
+        font-size: 16px;
+        outline: none;
+
+        &:focus {
+          box-shadow: $shadow;
+        }
+      }
+    }
+
+    .subtotal {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid $negro;
+      padding-top: $space-3;
+      margin-top: $space-1;
+
+      span {
+        font-weight: 800;
+      }
+    }
+  }
+
+  #totalCarrito.subtotal {
+    @include card($bg: $blanco, $border-color: $negro, $padding: $space-4);
+
+    margin-top: $space-5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+
+    span {
+      font-weight: 900;
+    }
+  }
+
+  .btn-finalizar {
+    @include button(
+      $bg: $naranja,
+      $fg: $blanco,
+      $border: 1px solid $negro,
+      $hover-opacity: 0.9
+    );
+
+    width: 100%;
+    margin-top: $space-4;
+  }
+
+  @media (min-width: 768px) {
+    #carritoProductos {
+      gap: $space-5;
+    }
+
+    .producto-card {
+      grid-template-columns: 1fr 260px;
+      align-items: start;
+
+      .imagen {
+        order: 2;
+      }
+
+      .titulo,
+      .talla-precio,
+      .color,
+      .unidades,
+      .subtotal {
+        order: 1;
+      }
+    }
+  }
+}
