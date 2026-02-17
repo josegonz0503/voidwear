@@ -1,4 +1,3 @@
-/* js/accs.js */
 $(function () {
   const CLAVE_STORAGE = "voidwear_acc_v1";
 
@@ -83,9 +82,7 @@ $(function () {
     sincronizarUI();
   }
 
-  // ✅ panel pegado al menú cuando se abre desde el menú lateral
   function aplicarPosicionDesdeMenu() {
-    // Solo si existe el menú lateral en la página
     if ($("#menuLateral").length) $panel.addClass("acc-desde-menu");
   }
 
@@ -103,11 +100,9 @@ $(function () {
     $btnAbrir.trigger("focus");
   }
 
-  // INIT
   let estado = cargar();
   aplicarTodo();
 
-  // Toggle abrir/cerrar
   $btnAbrir.on("click", function () {
     const abierto = $(this).attr("aria-expanded") === "true";
     abierto ? cerrarPanel() : abrirPanel();
@@ -115,19 +110,16 @@ $(function () {
 
   $btnCerrar.on("click", cerrarPanel);
 
-  // ESC cierra
   $(document).on("keydown", function (e) {
     if (e.key === "Escape" && !$panel.prop("hidden")) cerrarPanel();
   });
 
-  // Click fuera cierra
   $(document).on("mousedown", function (e) {
     if ($panel.prop("hidden")) return;
     const dentro = $(e.target).closest("#accPanel, #openAccFromMenu").length > 0;
     if (!dentro) cerrarPanel();
   });
 
-  // Controles
   $contraste.on("change", function () {
     estado.contraste = this.value;
     aplicarContraste(estado.contraste);

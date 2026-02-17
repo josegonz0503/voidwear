@@ -295,8 +295,6 @@ body {
     order: 1;
   }
 }
-/* ===== FIX VISUAL: evitar estilo por defecto del navegador ===== */
-/* Para cualquier botón que uses como "icono" o "texto" (sin caja) */
 .btn-reset-visual {
   -webkit-appearance: none;
   appearance: none;
@@ -309,14 +307,12 @@ body {
   line-height: inherit;
 }
 
-/* Asegura que la categoría NO se vea como botón/selector */
 button.categoria.btn-reset-visual {
   background: transparent;
   border: 0;
   padding: 0;
 }
 
-/* Botón de papelera: sin caja */
 button.eliminar.btn-reset-visual {
   -webkit-appearance: none;
   appearance: none;
@@ -343,3 +339,4 @@ button.btn-reset-visual:focus {
   bottom: auto;
 }
 
+/*# sourceMappingURL=output.css.map */

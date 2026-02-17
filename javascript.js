@@ -1,6 +1,4 @@
-/* =========================
-   SLIDER
-========================= */
+
 let currentIndex = 0;
 
 const slider = document.getElementById('slider');
@@ -22,9 +20,7 @@ function moveSlide(direction) {
   updateSlider();
 }
 
-/* =========================
-   MENÚ LATERAL (FIX DOBLE CLICK)
-========================= */
+
 const menu = document.getElementById('menuLateral');
 const abrirMenuBtn = document.querySelector('.menu-toggle'); 
 const cerrarMenuBtn = document.getElementById('cerrarMenu');
@@ -34,7 +30,6 @@ function openMenu() {
   menu.classList.add('active');
   abrirMenuBtn.setAttribute('aria-expanded', 'true');
 
-  // foco dentro del menú (opcional)
   setTimeout(() => {
     const first = menu.querySelector('button, a, input, select, textarea');
     if (first) first.focus();
@@ -50,7 +45,6 @@ function closeMenu() {
 
 if (abrirMenuBtn && menu) {
   abrirMenuBtn.addEventListener('click', (e) => {
-    // CLAVE: si no paras, el listener global puede cerrarlo al instante
     e.preventDefault();
     e.stopPropagation();
 
@@ -66,8 +60,6 @@ if (cerrarMenuBtn && menu) {
     closeMenu();
   }, false);
 }
-
-// Click fuera -> cierra (en captura para que no dependa del orden)
 document.addEventListener('click', (e) => {
   if (!menu || !abrirMenuBtn) return;
 
@@ -79,17 +71,13 @@ document.addEventListener('click', (e) => {
   }
 }, true);
 
-// ESC cierra menú
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && menu && menu.classList.contains('active')) {
     closeMenu();
   }
 });
 
-/* =========================
-   SUBMENÚS (categorías)
-   (usa hidden, no display:flex)
-========================= */
+
 document.querySelectorAll(".categoria[aria-controls]").forEach(btn => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -101,7 +89,6 @@ document.querySelectorAll(".categoria[aria-controls]").forEach(btn => {
 
     const expanded = btn.getAttribute("aria-expanded") === "true";
 
-    // Cierra otros
     document.querySelectorAll(".submenu").forEach(s => {
       if (s !== submenu) s.hidden = true;
     });
@@ -109,15 +96,12 @@ document.querySelectorAll(".categoria[aria-controls]").forEach(btn => {
       if (b !== btn) b.setAttribute("aria-expanded", "false");
     });
 
-    // Toggle actual
     btn.setAttribute("aria-expanded", String(!expanded));
     submenu.hidden = expanded;
   });
 });
 
-/* =========================
-   FILTRO PANEL
-========================= */
+
 const filtroToggleBtn = document.querySelector(".filtro-toggle");
 const filtroPanel = document.getElementById("filtroPanel");
 const cerrarFiltroBtn = document.getElementById("cerrarFiltro");
@@ -151,7 +135,6 @@ if (cerrarFiltroBtn && filtroPanel) {
     closeFilter();
   });
 
-  // Click fuera del contenido del filtro
   filtroPanel.addEventListener("click", (e) => {
     if (!e.target.closest(".filtro-contenido")) {
       closeFilter();
@@ -159,16 +142,13 @@ if (cerrarFiltroBtn && filtroPanel) {
   });
 }
 
-// ESC cierra filtros
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && filtroPanel && filtroPanel.classList.contains("active")) {
     closeFilter();
   }
 });
 
-/* =========================
-   CARRITO (localStorage)
-========================= */
+
 function obtenerCarrito() {
   return JSON.parse(localStorage.getItem("carrito")) || [];
 }
@@ -226,13 +206,10 @@ function reiniciarBotonesCarrito() {
   });
 }
 
-/* =========================
-   INICIAL
-========================= */
+
 document.addEventListener("DOMContentLoaded", () => {
   reiniciarBotonesCarrito();
 
-  // Click en slide -> detalle
   document.querySelectorAll(".slide").forEach(slide => {
     slide.addEventListener("click", (e) => {
       if (e.target.closest("button") || e.target.closest("select") || e.target.closest("a")) return;
@@ -241,7 +218,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Click en product-card -> detalle (si existe)
   document.querySelectorAll(".product-card").forEach(card => {
     card.addEventListener("click", (e) => {
       if (e.target.closest("button") || e.target.closest("select") || e.target.closest("a")) return;
@@ -250,7 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Carrito (en tu HTML actual es <a aria-label="Carrito">)
   const carritoLink = document.querySelector('header .icons-header a[aria-label="Carrito"]');
   if (carritoLink) {
     carritoLink.addEventListener("click", (e) => {
@@ -260,5 +235,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Por si otros scripts lo llaman
 window.reiniciarBotonesCarrito = reiniciarBotonesCarrito;

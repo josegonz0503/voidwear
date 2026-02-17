@@ -14,7 +14,6 @@
 
 
   <header class="header">
-    <!-- img clicable -> button (directriz: elemento interactivo real) -->
     <button
       id="menuToggle"
       type="button"
@@ -43,7 +42,6 @@
   <nav id="menuLateral" class="menu-lateral" aria-label="Menú principal">
     <button id="cerrarMenu" type="button" class="cerrar-menu btn-reset-visual" aria-label="Cerrar menú">×</button>
 
-    <!-- Botón abrir accesibilidad (tu requisito: dentro del menú) -->
     <button
       id="openAccFromMenu"
       type="button"
@@ -54,7 +52,6 @@
       Accesibilidad
     </button>
 
-    <!-- Panel accesibilidad -->
     <aside
       id="accPanel"
       class="acc-panel"
@@ -111,7 +108,6 @@
       </div>
     </aside>
 
-    <!-- Categorías (directriz: button + aria-expanded + aria-controls) -->
     <div class="menu-item">
       <button class="categoria btn-reset-visual" type="button" aria-expanded="false" aria-controls="submenu-mujer">
         Mujer ▼
@@ -143,7 +139,6 @@
 
     <h1 class="titulo-carrito">Shopping Cart</h1>
 
-    <!-- dinámico: aria-live -->
     <div id="carritoProductos" aria-live="polite"></div>
 
     <div class="subtotal" id="totalCarrito" aria-live="polite"></div>
@@ -155,14 +150,11 @@
   <script src="js/accs.js"></script>
 
   <script>
-    // =========================
-    // MENÚ LATERAL (directrices: teclado + aria)
-    // =========================
+
     const menuLateral = document.getElementById("menuLateral");
     const menuToggle = document.getElementById("menuToggle");
     const cerrarMenu = document.getElementById("cerrarMenu");
 
-    // ✅ FIX: fuerza estado inicial cerrado (evita que se quede visible)
     menuLateral.classList.remove("open");
     menuToggle.setAttribute("aria-expanded", "false");
 
@@ -189,19 +181,16 @@
       cerrarMenuFn();
     });
 
-    // Click fuera cierra
     document.addEventListener("click", (e) => {
       if (!menuLateral.classList.contains("open")) return;
       const dentro = menuLateral.contains(e.target) || menuToggle.contains(e.target);
       if (!dentro) cerrarMenuFn();
     }, true);
 
-    // ESC cierra
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && menuLateral.classList.contains("open")) cerrarMenuFn();
     });
 
-    // Submenús accesibles (manteniendo tu .show y .active)
     document.querySelectorAll(".categoria").forEach(cat => {
       cat.addEventListener("click", (e) => {
         e.preventDefault();
@@ -216,9 +205,7 @@
       });
     });
 
-    // =========================
-    // CARRITO
-    // =========================
+ 
     function obtenerCarrito() {
       return JSON.parse(localStorage.getItem("carrito")) || [];
     }
