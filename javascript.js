@@ -1,3 +1,6 @@
+/* =========================
+   SLIDER
+========================= */
 let currentIndex = 0;
 
 const slider = document.getElementById('slider');
@@ -5,86 +8,167 @@ const slides = slider ? slider.children : [];
 const totalSlides = slides ? slides.length : 0;
 
 function updateSlider() {
-    if (!slider) return;
-    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+  if (!slider) return;
+  slider.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
 
 function moveSlide(direction) {
-    if (!slider) return;
-    currentIndex += direction;
-    if (currentIndex < 0) currentIndex = totalSlides - 1;
-    if (currentIndex >= totalSlides) currentIndex = 0;
-    updateSlider();
+  if (!slider) return;
+
+  currentIndex += direction;
+  if (currentIndex < 0) currentIndex = totalSlides - 1;
+  if (currentIndex >= totalSlides) currentIndex = 0;
+
+  updateSlider();
 }
 
+/* =========================
+   MENÚ LATERAL (FIX DOBLE CLICK)
+========================= */
 const menu = document.getElementById('menuLateral');
-const abrirMenu = document.querySelector('.menu-toggle'); 
-const cerrarMenu = document.getElementById('cerrarMenu');
+const abrirMenuBtn = document.querySelector('.menu-toggle'); 
+const cerrarMenuBtn = document.getElementById('cerrarMenu');
 
-if (abrirMenu && menu) {
-  abrirMenu.addEventListener('click', () => {
-      menu.classList.add('active');
-  });
+function openMenu() {
+  if (!menu || !abrirMenuBtn) return;
+  menu.classList.add('active');
+  abrirMenuBtn.setAttribute('aria-expanded', 'true');
+
+  // foco dentro del menú (opcional)
+  setTimeout(() => {
+    const first = menu.querySelector('button, a, input, select, textarea');
+    if (first) first.focus();
+  }, 0);
 }
 
-if (cerrarMenu && menu) {
-  cerrarMenu.addEventListener('click', () => {
-      menu.classList.remove('active');
-  });
+function closeMenu() {
+  if (!menu || !abrirMenuBtn) return;
+  menu.classList.remove('active');
+  abrirMenuBtn.setAttribute('aria-expanded', 'false');
+  abrirMenuBtn.focus();
 }
 
+if (abrirMenuBtn && menu) {
+  abrirMenuBtn.addEventListener('click', (e) => {
+    // CLAVE: si no paras, el listener global puede cerrarlo al instante
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (menu.classList.contains('active')) closeMenu();
+    else openMenu();
+  }, false);
+}
+
+if (cerrarMenuBtn && menu) {
+  cerrarMenuBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeMenu();
+  }, false);
+}
+
+// Click fuera -> cierra (en captura para que no dependa del orden)
 document.addEventListener('click', (e) => {
-    if (menu && abrirMenu) {
-      if (!menu.contains(e.target) && !abrirMenu.contains(e.target)) {
-          menu.classList.remove('active');
-      }
-    }
+  if (!menu || !abrirMenuBtn) return;
+
+  const clickDentroMenu = menu.contains(e.target);
+  const clickEnBoton = abrirMenuBtn.contains(e.target);
+
+  if (!clickDentroMenu && !clickEnBoton) {
+    closeMenu();
+  }
+}, true);
+
+// ESC cierra menú
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && menu && menu.classList.contains('active')) {
+    closeMenu();
+  }
 });
 
-const categorias = document.querySelectorAll(".categoria");
+/* =========================
+   SUBMENÚS (categorías)
+   (usa hidden, no display:flex)
+========================= */
+document.querySelectorAll(".categoria[aria-controls]").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-categorias.forEach(categoria => {
-    categoria.addEventListener("click", () => {
-        const submenu = categoria.nextElementSibling;
+    const id = btn.getAttribute("aria-controls");
+    const submenu = document.getElementById(id);
+    if (!submenu) return;
 
-        document.querySelectorAll(".submenu").forEach(s => {
-            if (s !== submenu) s.style.display = "none";
-        });
-        document.querySelectorAll(".categoria").forEach(c => {
-            if (c !== categoria) c.classList.remove("active");
-        });
+    const expanded = btn.getAttribute("aria-expanded") === "true";
 
-        submenu.style.display = submenu.style.display === "flex" ? "none" : "flex";
-        categoria.classList.toggle("active");
+    // Cierra otros
+    document.querySelectorAll(".submenu").forEach(s => {
+      if (s !== submenu) s.hidden = true;
     });
+    document.querySelectorAll(".categoria[aria-controls]").forEach(b => {
+      if (b !== btn) b.setAttribute("aria-expanded", "false");
+    });
+
+    // Toggle actual
+    btn.setAttribute("aria-expanded", String(!expanded));
+    submenu.hidden = expanded;
+  });
 });
 
-
-const filtroToggle = document.querySelector(".filtro-toggle");
+/* =========================
+   FILTRO PANEL
+========================= */
+const filtroToggleBtn = document.querySelector(".filtro-toggle");
 const filtroPanel = document.getElementById("filtroPanel");
-const cerrarFiltro = document.getElementById("cerrarFiltro");
+const cerrarFiltroBtn = document.getElementById("cerrarFiltro");
 
-if (filtroToggle && filtroPanel) {
-  filtroToggle.addEventListener("click", () => {
-      filtroPanel.classList.add("active");
+function openFilter() {
+  if (!filtroPanel || !filtroToggleBtn) return;
+  filtroPanel.classList.add("active");
+  filtroToggleBtn.setAttribute("aria-expanded", "true");
+}
+
+function closeFilter() {
+  if (!filtroPanel || !filtroToggleBtn) return;
+  filtroPanel.classList.remove("active");
+  filtroToggleBtn.setAttribute("aria-expanded", "false");
+  filtroToggleBtn.focus();
+}
+
+if (filtroToggleBtn && filtroPanel) {
+  filtroToggleBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (filtroPanel.classList.contains("active")) closeFilter();
+    else openFilter();
   });
 }
 
-if (cerrarFiltro && filtroPanel) {
-  cerrarFiltro.addEventListener("click", () => {
-      filtroPanel.classList.remove("active");
+if (cerrarFiltroBtn && filtroPanel) {
+  cerrarFiltroBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeFilter();
   });
 
+  // Click fuera del contenido del filtro
   filtroPanel.addEventListener("click", (e) => {
-      if (!e.target.closest(".filtro-contenido")) {
-          filtroPanel.classList.remove("active");
-      }
+    if (!e.target.closest(".filtro-contenido")) {
+      closeFilter();
+    }
   });
 }
 
+// ESC cierra filtros
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && filtroPanel && filtroPanel.classList.contains("active")) {
+    closeFilter();
+  }
+});
 
-
-
+/* =========================
+   CARRITO (localStorage)
+========================= */
 function obtenerCarrito() {
   return JSON.parse(localStorage.getItem("carrito")) || [];
 }
@@ -98,22 +182,20 @@ function agregarProducto(producto) {
 
   const existe = carrito.find(p => p.nombre === producto.nombre && (p.talla || "") === (producto.talla || ""));
 
-  if (existe) {
-    existe.cantidad += producto.cantidad;
-  } else {
-    carrito.push(producto);
-  }
+  if (existe) existe.cantidad += producto.cantidad;
+  else carrito.push(producto);
 
   guardarCarrito(carrito);
   alert("Producto añadido al carrito");
 }
 
-function reiniciarBotonesCarrito(){
+function reiniciarBotonesCarrito() {
   document.querySelectorAll(".add-carrito").forEach(btn => {
     if (btn.dataset.bound === "1") return;
     btn.dataset.bound = "1";
 
     btn.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
 
       const card = btn.closest(".product-card") || btn.closest(".slide");
@@ -124,8 +206,7 @@ function reiniciarBotonesCarrito(){
         card.querySelector(".titulo-producto")?.innerText ||
         "Producto";
 
-      const imagen =
-        card.querySelector("img")?.getAttribute("src") || "";
+      const imagen = card.querySelector("img")?.getAttribute("src") || "";
 
       const select = card.querySelector(".select-talla");
       const precio = select ? Number(select.value) : 0;
@@ -145,18 +226,22 @@ function reiniciarBotonesCarrito(){
   });
 }
 
-// Inicial
+/* =========================
+   INICIAL
+========================= */
 document.addEventListener("DOMContentLoaded", () => {
   reiniciarBotonesCarrito();
 
+  // Click en slide -> detalle
   document.querySelectorAll(".slide").forEach(slide => {
     slide.addEventListener("click", (e) => {
-      if (e.target.closest("button") || e.target.closest("select")) return;
+      if (e.target.closest("button") || e.target.closest("select") || e.target.closest("a")) return;
       const id = slide.dataset.id;
       if (id) window.location.href = `detalle.html?id=${encodeURIComponent(id)}`;
     });
   });
 
+  // Click en product-card -> detalle (si existe)
   document.querySelectorAll(".product-card").forEach(card => {
     card.addEventListener("click", (e) => {
       if (e.target.closest("button") || e.target.closest("select") || e.target.closest("a")) return;
@@ -165,12 +250,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const carritoIcon = document.querySelector('header .icons-header img[alt="Carrito"]');
-  if (carritoIcon) {
-    carritoIcon.addEventListener("click", () => {
+  // Carrito (en tu HTML actual es <a aria-label="Carrito">)
+  const carritoLink = document.querySelector('header .icons-header a[aria-label="Carrito"]');
+  if (carritoLink) {
+    carritoLink.addEventListener("click", (e) => {
+      e.preventDefault();
       window.location.href = "carrito.html";
     });
   }
 });
 
+// Por si otros scripts lo llaman
 window.reiniciarBotonesCarrito = reiniciarBotonesCarrito;

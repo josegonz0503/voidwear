@@ -4,175 +4,336 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrito - VoidWear</title>
+
+  <link rel="stylesheet" href="css/accs.css">
   <link rel="stylesheet" href="sass/output.css">
 </head>
 
 <body>
 
-<header class="header">
-  <img id="menuToggle" src="iconos/menu.png" alt="menu" class="header-icon left">
 
-  <a href="index.html">
-    <img src="logos/normal.png" alt="Logo" class="header-logo">
-  </a>
 
-  <div class="header-right">
-    <img src="iconos/perfil.png" class="header-icon">
-    <img src="iconos/carrito.png" class="header-icon">
-  </div>
-</header>
+  <header class="header">
+    <!-- img clicable -> button (directriz: elemento interactivo real) -->
+    <button
+      id="menuToggle"
+      type="button"
+      class="header-icon left btn-reset-visual"
+      aria-label="Abrir menú"
+      aria-controls="menuLateral"
+      aria-expanded="false"
+    >
+      <img src="iconos/menu.png" alt="">
+    </button>
 
-<nav id="menuLateral" class="menu-lateral">
+    <a href="index.html" aria-label="Ir a inicio">
+      <img src="logos/normal.png" alt="Logo VoidWear" class="header-logo">
+    </a>
 
-  <button id="cerrarMenu" class="cerrar-menu">×</button>
-
-  <div class="menu-item">
-    <p class="categoria">Mujer ▼</p>
-    <div class="submenu">
-      <a>Camisetas</a>
-      <a>Pantalones</a>
-      <a>Chaquetas</a>
-      <a>Accesorios</a>
+    <div class="header-right">
+      <a href="#" class="header-icon" aria-label="Perfil">
+        <img src="iconos/perfil.png" class="header-icon" alt="">
+      </a>
+      <a href="carrito.html" class="header-icon" aria-label="Carrito">
+        <img src="iconos/carrito.png" class="header-icon" alt="">
+      </a>
     </div>
-  </div>
+  </header>
 
-  <div class="menu-item">
-    <p class="categoria">Hombre ▼</p>
-    <div class="submenu">
-      <a>Camisetas</a>
-      <a>Pantalones</a>
-      <a>Chaquetas</a>
-      <a>Accesorios</a>
+  <nav id="menuLateral" class="menu-lateral" aria-label="Menú principal">
+    <button id="cerrarMenu" type="button" class="cerrar-menu btn-reset-visual" aria-label="Cerrar menú">×</button>
+
+    <!-- Botón abrir accesibilidad (tu requisito: dentro del menú) -->
+    <button
+      id="openAccFromMenu"
+      type="button"
+      aria-controls="accPanel"
+      aria-expanded="false"
+      class="mb-4 border border-negro rounded px-3 py-2 text-negro"
+    >
+      Accesibilidad
+    </button>
+
+    <!-- Panel accesibilidad -->
+    <aside
+      id="accPanel"
+      class="acc-panel"
+      role="dialog"
+      aria-modal="false"
+      aria-label="Menú de accesibilidad"
+      hidden
+    >
+      <div class="acc-panel__header">
+        <h2 class="acc-title">Accesibilidad</h2>
+        <button id="accClose" class="acc-close" type="button" aria-label="Cerrar accesibilidad">×</button>
+      </div>
+
+      <div class="acc-panel__body">
+        <section class="acc-section" aria-labelledby="acc-contrast-title">
+          <h3 id="acc-contrast-title">Contraste y filtros</h3>
+
+          <label for="accContrast">Modo</label>
+          <select id="accContrast" autocomplete="off">
+            <option value="none">Normal</option>
+            <option value="grayscale">Escala de grises</option>
+            <option value="dark">Contraste oscuro</option>
+            <option value="light">Contraste claro</option>
+            <option value="satHigh">Saturación alta</option>
+            <option value="satLow">Saturación baja</option>
+          </select>
+        </section>
+
+        <section class="acc-section" aria-labelledby="acc-text-title">
+          <h3 id="acc-text-title">Texto</h3>
+
+          <div class="acc-row">
+            <span id="accFontSizeLabel">Tamaño de letra</span>
+            <div class="acc-controls" role="group" aria-labelledby="accFontSizeLabel">
+              <button type="button" id="accFontMinus" aria-label="Disminuir tamaño de letra">A−</button>
+              <button type="button" id="accFontPlus" aria-label="Aumentar tamaño de letra">A+</button>
+            </div>
+          </div>
+
+          <label for="accLineHeight">Interlineado</label>
+          <input id="accLineHeight" type="range" min="1" max="2.2" step="0.1">
+
+          <label for="accWordSpacing">Espaciado entre palabras</label>
+          <input id="accWordSpacing" type="range" min="0" max="0.6" step="0.05">
+
+          <label for="accLetterSpacing">Espaciado entre letras</label>
+          <input id="accLetterSpacing" type="range" min="0" max="0.2" step="0.01">
+        </section>
+
+        <div class="acc-panel__footer">
+          <button id="accReset" type="button" class="acc-reset">Reset accesibilidad</button>
+          <p id="accStatus" class="sr-only" aria-live="polite"></p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Categorías (directriz: button + aria-expanded + aria-controls) -->
+    <div class="menu-item">
+      <button class="categoria btn-reset-visual" type="button" aria-expanded="false" aria-controls="submenu-mujer">
+        Mujer ▼
+      </button>
+      <div class="submenu" id="submenu-mujer">
+        <a href="#">Camisetas</a>
+        <a href="#">Pantalones</a>
+        <a href="#">Chaquetas</a>
+        <a href="#">Accesorios</a>
+      </div>
     </div>
-  </div>
 
-  <a class="solo-link">Ofertas</a>
-</nav>
+    <div class="menu-item">
+      <button class="categoria btn-reset-visual" type="button" aria-expanded="false" aria-controls="submenu-hombre">
+        Hombre ▼
+      </button>
+      <div class="submenu" id="submenu-hombre">
+        <a href="#">Camisetas</a>
+        <a href="#">Pantalones</a>
+        <a href="#">Chaquetas</a>
+        <a href="#">Accesorios</a>
+      </div>
+    </div>
 
+  </nav>
 
-<main class="carrito-contenedor">
+  <main id="contenido" tabindex="-1" class="carrito-contenedor">
+    <a href="index.html" class="btn-volver-inicio">← Volver a inicio</a>
 
-<a href="index.html" class="btn-volver-inicio">← Volver a inicio</a>
+    <h1 class="titulo-carrito">Shopping Cart</h1>
 
+    <!-- dinámico: aria-live -->
+    <div id="carritoProductos" aria-live="polite"></div>
 
-  <h1 class="titulo-carrito">Shopping Cart</h1>
+    <div class="subtotal" id="totalCarrito" aria-live="polite"></div>
 
-  <div id="carritoProductos"></div>
+    <button class="btn-finalizar" type="button">Finalizar compra</button>
+  </main>
 
-  <div class="subtotal" id="totalCarrito"></div>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/accs.js"></script>
 
-  <button class="btn-finalizar">Finalizar compra</button>
+  <script>
+    // =========================
+    // MENÚ LATERAL (directrices: teclado + aria)
+    // =========================
+    const menuLateral = document.getElementById("menuLateral");
+    const menuToggle = document.getElementById("menuToggle");
+    const cerrarMenu = document.getElementById("cerrarMenu");
 
-</main>
+    // ✅ FIX: fuerza estado inicial cerrado (evita que se quede visible)
+    menuLateral.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
 
-<script>
-  const menuLateral = document.getElementById("menuLateral");
-  const menuToggle = document.getElementById("menuToggle");
-  const cerrarMenu = document.getElementById("cerrarMenu");
-
-  menuToggle.onclick = () => menuLateral.classList.add("open");
-  cerrarMenu.onclick = () => menuLateral.classList.remove("open");
-
-  document.querySelectorAll(".categoria").forEach(cat => {
-      cat.addEventListener("click", () => {
-          cat.nextElementSibling.classList.toggle("show");
-          cat.classList.toggle("active");
-      });
-  });
-
-
-  function obtenerCarrito() {
-    return JSON.parse(localStorage.getItem("carrito")) || [];
-  }
-
-  function guardarCarrito(carrito) {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-  }
-
-  function formatoEuro(n) {
-    return n.toFixed(2).replace(".", ",") + "€";
-  }
-
-  const contenedor = document.getElementById("carritoProductos");
-  const totalHTML = document.getElementById("totalCarrito");
-
-  function renderCarrito() {
-    const carrito = obtenerCarrito();
-    contenedor.innerHTML = "";
-
-    if (carrito.length === 0) {
-      contenedor.innerHTML = `<p style="text-align:center;">Tu carrito está vacío</p>`;
-      totalHTML.innerHTML = `Total: <span>${formatoEuro(0)}</span>`;
-      return;
+    function abrirMenu() {
+      menuLateral.classList.add("open");
+      menuToggle.setAttribute("aria-expanded", "true");
     }
 
-    let total = 0;
+    function cerrarMenuFn() {
+      menuLateral.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.focus();
+    }
 
-    carrito.forEach((p, index) => {
-      const subtotal = (Number(p.precio) || 0) * (Number(p.cantidad) || 0);
-      total += subtotal;
-
-      contenedor.innerHTML += `
-        <div class="producto-card" data-index="${index}">
-          <div class="titulo">
-            <span>${p.nombre}</span>
-            <img class="eliminar" src="iconos/basura.png" alt="eliminar" data-index="${index}">
-          </div>
-
-          <div class="imagen">
-            <img src="${p.imagen}" alt="producto">
-          </div>
-
-          <div class="talla-precio">
-            <button class="btn-linea" type="button">Precio: ${formatoEuro(Number(p.precio) || 0)} ⬍</button>
-          </div>
-
-          <div class="color">
-            <label>Color:</label>
-            <div class="color-preview"></div>
-          </div>
-
-          <div class="unidades">
-            <label>Unidades:</label>
-            <input type="number" min="1" value="${Number(p.cantidad) || 1}" data-index="${index}">
-          </div>
-
-          <div class="subtotal">
-            Subtotal: <span>${formatoEuro(subtotal)}</span>
-          </div>
-        </div>
-      `;
+    menuToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      menuLateral.classList.contains("open") ? cerrarMenuFn() : abrirMenu();
     });
 
-    totalHTML.innerHTML = `Total: <span>${formatoEuro(total)}</span>`;
+    cerrarMenu.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      cerrarMenuFn();
+    });
 
-    document.querySelectorAll(".eliminar").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        const i = Number(e.currentTarget.dataset.index);
-        const carrito = obtenerCarrito();
-        carrito.splice(i, 1);
-        guardarCarrito(carrito);
-        renderCarrito();
+    // Click fuera cierra
+    document.addEventListener("click", (e) => {
+      if (!menuLateral.classList.contains("open")) return;
+      const dentro = menuLateral.contains(e.target) || menuToggle.contains(e.target);
+      if (!dentro) cerrarMenuFn();
+    }, true);
+
+    // ESC cierra
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menuLateral.classList.contains("open")) cerrarMenuFn();
+    });
+
+    // Submenús accesibles (manteniendo tu .show y .active)
+    document.querySelectorAll(".categoria").forEach(cat => {
+      cat.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const submenu = cat.nextElementSibling;
+        const expanded = cat.getAttribute("aria-expanded") === "true";
+
+        cat.setAttribute("aria-expanded", String(!expanded));
+        submenu.classList.toggle("show");
+        cat.classList.toggle("active");
       });
     });
 
-    document.querySelectorAll(".unidades input[type='number']").forEach(inp => {
-      inp.addEventListener("change", (e) => {
-        const i = Number(e.currentTarget.dataset.index);
-        const nuevaCantidad = Math.max(1, Number(e.currentTarget.value) || 1);
+    // =========================
+    // CARRITO
+    // =========================
+    function obtenerCarrito() {
+      return JSON.parse(localStorage.getItem("carrito")) || [];
+    }
 
-        const carrito = obtenerCarrito();
-        if (!carrito[i]) return;
+    function guardarCarrito(carrito) {
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+    }
 
-        carrito[i].cantidad = nuevaCantidad;
-        guardarCarrito(carrito);
-        renderCarrito();
+    function formatoEuro(n) {
+      return n.toFixed(2).replace(".", ",") + "€";
+    }
+
+    const contenedor = document.getElementById("carritoProductos");
+    const totalHTML = document.getElementById("totalCarrito");
+
+    function renderCarrito() {
+      const carrito = obtenerCarrito();
+      contenedor.innerHTML = "";
+
+      if (carrito.length === 0) {
+        contenedor.innerHTML = `<p style="text-align:center;">Tu carrito está vacío</p>`;
+        totalHTML.innerHTML = `Total: <span>${formatoEuro(0)}</span>`;
+        return;
+      }
+
+      let total = 0;
+
+      carrito.forEach((p, index) => {
+        const subtotal = (Number(p.precio) || 0) * (Number(p.cantidad) || 0);
+        total += subtotal;
+
+        const nombre = (p.nombre || "Producto").replace(/"/g, "&quot;");
+        const altImg = `Imagen de ${nombre}`;
+
+        contenedor.innerHTML += `
+          <div class="producto-card" data-index="${index}">
+            <div class="titulo">
+              <span>${nombre}</span>
+
+              <!-- directriz: no usar img clicable -->
+              <button
+                class="eliminar btn-reset-visual"
+                type="button"
+                data-index="${index}"
+                aria-label="Eliminar ${nombre} del carrito"
+                title="Eliminar"
+              >
+                <img src="iconos/basura.png" alt="">
+              </button>
+            </div>
+
+            <div class="imagen">
+              <img src="${p.imagen}" alt="${altImg}">
+            </div>
+
+            <div class="talla-precio">
+              <button class="btn-linea btn-reset-visual" type="button" aria-label="Precio de ${nombre}">
+                Precio: ${formatoEuro(Number(p.precio) || 0)} ⬍
+              </button>
+            </div>
+
+            <div class="color">
+              <label>Color:</label>
+              <div class="color-preview" role="img" aria-label="Color del producto"></div>
+            </div>
+
+            <div class="unidades">
+              <label for="cantidad-${index}">Unidades:</label>
+              <input
+                id="cantidad-${index}"
+                type="number"
+                min="1"
+                value="${Number(p.cantidad) || 1}"
+                data-index="${index}"
+                inputmode="numeric"
+                aria-required="true"
+              >
+            </div>
+
+            <div class="subtotal">
+              Subtotal: <span>${formatoEuro(subtotal)}</span>
+            </div>
+          </div>
+        `;
       });
-    });
-  }
 
-  renderCarrito();
-</script>
+      totalHTML.innerHTML = `Total: <span>${formatoEuro(total)}</span>`;
+
+      document.querySelectorAll("button.eliminar").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          const i = Number(e.currentTarget.dataset.index);
+          const carrito = obtenerCarrito();
+          carrito.splice(i, 1);
+          guardarCarrito(carrito);
+          renderCarrito();
+        });
+      });
+
+      document.querySelectorAll(".unidades input[type='number']").forEach(inp => {
+        inp.addEventListener("change", (e) => {
+          const i = Number(e.currentTarget.dataset.index);
+          const nuevaCantidad = Math.max(1, Number(e.currentTarget.value) || 1);
+
+          const carrito = obtenerCarrito();
+          if (!carrito[i]) return;
+
+          carrito[i].cantidad = nuevaCantidad;
+          guardarCarrito(carrito);
+          renderCarrito();
+        });
+      });
+    }
+
+    renderCarrito();
+  </script>
 
 </body>
 </html>

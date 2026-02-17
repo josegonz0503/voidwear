@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "inter";
   src: url("/fuentes/Inter/Inter-VariableFont_opsz,wght.ttf");
@@ -8,6 +9,7 @@ body {
   color: #111;
 }
 
+/* HEADER */
 .header {
   width: 100%;
   height: 70px;
@@ -42,6 +44,7 @@ body {
   gap: 10px;
 }
 
+/* MENÚ LATERAL */
 .menu-lateral {
   width: 240px;
   height: 100%;
@@ -92,6 +95,7 @@ body {
   cursor: pointer;
 }
 
+/* CARRITO */
 .carrito-contenedor {
   width: min(1000px, 92%);
   margin: 0 auto;
@@ -271,6 +275,7 @@ body {
   width: 100%;
   margin-top: 16px;
 }
+
 @media (min-width: 768px) {
   .carrito-contenedor #carritoProductos {
     gap: 20px;
@@ -290,3 +295,51 @@ body {
     order: 1;
   }
 }
+/* ===== FIX VISUAL: evitar estilo por defecto del navegador ===== */
+/* Para cualquier botón que uses como "icono" o "texto" (sin caja) */
+.btn-reset-visual {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+}
+
+/* Asegura que la categoría NO se vea como botón/selector */
+button.categoria.btn-reset-visual {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/* Botón de papelera: sin caja */
+button.eliminar.btn-reset-visual {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+button.eliminar img {
+  display: block;
+}
+
+button.btn-reset-visual:focus {
+  outline: none;
+}
+
+.acc-panel.acc-desde-menu {
+  position: fixed;
+  inset: auto auto auto auto;
+  top: 1rem;
+  left: calc(240px + 1rem);
+  right: auto;
+  bottom: auto;
+}
+

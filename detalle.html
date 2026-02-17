@@ -4,155 +4,283 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Detalle Producto - VoidWear</title>
+
+  <link rel="stylesheet" href="css/accs.css">
   <link rel="stylesheet" href="css/tailwind-build.css">
 </head>
 
 <body class="bg-blanco font-principal">
 
+<a href="#contenido" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-negro focus:text-blanco focus:px-4 focus:py-2 focus:rounded">
+  Saltar al contenido principal
+</a>
+
 <header class="w-full bg-blanco flex items-center justify-center h-[70px] border-b border-negro sticky top-0 z-20 relative">
 
-  <img id="menuToggle"
-       src="iconos/menu.png"
-       class="w-7 h-7 absolute left-4 cursor-pointer"
-       alt="menu">
+  <button
+    id="menuToggle"
+    type="button"
+    class="absolute left-4"
+    aria-label="Abrir menú"
+    aria-controls="menuLateral"
+    aria-expanded="false"
+  >
+    <img src="iconos/menu.png" class="w-7 h-7" alt="">
+  </button>
 
-  <a href="index.html">
-    <img src="logos/normal.png" alt="Logo" class="h-[50px]">
+  <a href="index.html" aria-label="Ir a inicio">
+    <img src="logos/normal.png" alt="Logo VoidWear" class="h-[50px]">
   </a>
 
   <div class="absolute right-4 flex gap-3">
-      <img src="iconos/perfil.png" class="w-7 h-7 cursor-pointer" alt="perfil">
-      <img id="iconoCarrito" src="iconos/carrito.png" class="w-7 h-7 cursor-pointer" alt="carrito">
+    <a href="#" class="w-7 h-7 inline-flex items-center justify-center" aria-label="Perfil">
+      <img src="iconos/perfil.png" class="w-7 h-7" alt="">
+    </a>
+
+    <button
+      id="iconoCarrito"
+      type="button"
+      class="w-7 h-7 inline-flex items-center justify-center"
+      aria-label="Ir al carrito"
+    >
+      <img src="iconos/carrito.png" class="w-7 h-7" alt="">
+    </button>
   </div>
 </header>
 
-<nav id="menuLateral"
-     class="fixed top-0 left-0 w-[230px] h-full p-5 flex flex-col
-            -translate-x-full transition-transform duration-300 z-30
-            bg-blanco border-r border-negro">
+<nav
+  id="menuLateral"
+  class="fixed top-0 left-0 w-[230px] h-full p-5 flex flex-col
+         -translate-x-full transition-transform duration-300 z-30
+         bg-blanco border-r border-negro"
+  aria-label="Menú principal"
+>
 
-    <button id="cerrarMenu" class="self-end text-xl font-bold mb-4 cursor-pointer">×</button>
+  <button
+    id="cerrarMenu"
+    type="button"
+    class="self-end text-xl font-bold mb-4 cursor-pointer"
+    aria-label="Cerrar menú"
+  >
+    ×
+  </button>
 
-    <div class="mb-4">
-        <p class="categoria font-bold text-lg cursor-pointer text-negro">Mujer ▼</p>
-        <div class="submenu ml-2 hidden">
-            <a class="block py-1 text-negro">Camisetas</a>
-            <a class="block py-1 text-negro">Pantalones</a>
-            <a class="block py-1 text-negro">Chaquetas</a>
-            <a class="block py-1 text-negro">Accesorios</a>
-        </div>
+  <button
+    id="openAccFromMenu"
+    type="button"
+    aria-controls="accPanel"
+    aria-expanded="false"
+    class="mb-4 border border-negro rounded px-3 py-2 text-negro"
+  >
+    Accesibilidad
+  </button>
+
+  <aside
+    id="accPanel"
+    class="acc-panel"
+    role="dialog"
+    aria-modal="false"
+    aria-label="Menú de accesibilidad"
+    hidden
+  >
+    <div class="acc-panel__header">
+      <h2 class="acc-title">Accesibilidad</h2>
+      <button id="accClose" class="acc-close" type="button" aria-label="Cerrar accesibilidad">×</button>
     </div>
 
-    <div class="mb-4">
-        <p class="categoria font-bold text-lg cursor-pointer text-negro">Hombre ▼</p>
-        <div class="submenu ml-2 hidden">
-            <a class="block py-1 text-negro">Camisetas</a>
-            <a class="block py-1 text-negro">Pantalones</a>
-            <a class="block py-1 text-negro">Chaquetas</a>
-            <a class="block py-1 text-negro">Accesorios</a>
-        </div>
-    </div>
+    <div class="acc-panel__body">
+      <section class="acc-section" aria-labelledby="acc-contrast-title">
+        <h3 id="acc-contrast-title">Contraste y filtros</h3>
+        <label for="accContrast">Modo</label>
+        <select id="accContrast" autocomplete="off">
+          <option value="none">Normal</option>
+          <option value="grayscale">Escala de grises</option>
+          <option value="dark">Contraste oscuro</option>
+          <option value="light">Contraste claro</option>
+          <option value="satHigh">Saturación alta</option>
+          <option value="satLow">Saturación baja</option>
+        </select>
+      </section>
 
-    <div class="mb-4">
-        <p class="categoria font-bold text-lg cursor-pointer text-negro">Niños ▼</p>
-        <div class="submenu ml-2 hidden">
-            <a class="block py-1 text-negro">Camisetas</a>
-            <a class="block py-1 text-negro">Pantalones</a>
-            <a class="block py-1 text-negro">Chaquetas</a>
-            <a class="block py-1 text-negro">Accesorios</a>
-        </div>
-    </div>
+      <section class="acc-section" aria-labelledby="acc-text-title">
+        <h3 id="acc-text-title">Texto</h3>
 
-    <a class="text-lg mt-2 block text-negro">Ofertas</a>
+        <div class="acc-row">
+          <span id="accFontSizeLabel">Tamaño de letra</span>
+          <div class="acc-controls" role="group" aria-labelledby="accFontSizeLabel">
+            <button type="button" id="accFontMinus" aria-label="Disminuir tamaño de letra">A−</button>
+            <button type="button" id="accFontPlus" aria-label="Aumentar tamaño de letra">A+</button>
+          </div>
+        </div>
+
+        <label for="accLineHeight">Interlineado</label>
+        <input id="accLineHeight" type="range" min="1" max="2.2" step="0.1">
+
+        <label for="accWordSpacing">Espaciado entre palabras</label>
+        <input id="accWordSpacing" type="range" min="0" max="0.6" step="0.05">
+
+        <label for="accLetterSpacing">Espaciado entre letras</label>
+        <input id="accLetterSpacing" type="range" min="0" max="0.2" step="0.01">
+      </section>
+
+      <div class="acc-panel__footer">
+        <button id="accReset" type="button" class="acc-reset">Reset accesibilidad</button>
+        <p id="accStatus" class="sr-only" aria-live="polite"></p>
+      </div>
+    </div>
+  </aside>
+
+  <div class="mb-4">
+    <button
+      class="categoria font-bold text-lg cursor-pointer text-negro w-full text-left"
+      type="button"
+      aria-expanded="false"
+      aria-controls="submenu-mujer"
+    >
+      Mujer ▼
+    </button>
+    <div id="submenu-mujer" class="submenu ml-2 hidden">
+      <a href="#" class="block py-1 text-negro">Camisetas</a>
+      <a href="#" class="block py-1 text-negro">Pantalones</a>
+      <a href="#" class="block py-1 text-negro">Chaquetas</a>
+      <a href="#" class="block py-1 text-negro">Accesorios</a>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <button
+      class="categoria font-bold text-lg cursor-pointer text-negro w-full text-left"
+      type="button"
+      aria-expanded="false"
+      aria-controls="submenu-hombre"
+    >
+      Hombre ▼
+    </button>
+    <div id="submenu-hombre" class="submenu ml-2 hidden">
+      <a href="#" class="block py-1 text-negro">Camisetas</a>
+      <a href="#" class="block py-1 text-negro">Pantalones</a>
+      <a href="#" class="block py-1 text-negro">Chaquetas</a>
+      <a href="#" class="block py-1 text-negro">Accesorios</a>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <button
+      class="categoria font-bold text-lg cursor-pointer text-negro w-full text-left"
+      type="button"
+      aria-expanded="false"
+      aria-controls="submenu-ninos"
+    >
+      Niños ▼
+    </button>
+    <div id="submenu-ninos" class="submenu ml-2 hidden">
+      <a href="#" class="block py-1 text-negro">Camisetas</a>
+      <a href="#" class="block py-1 text-negro">Pantalones</a>
+      <a href="#" class="block py-1 text-negro">Chaquetas</a>
+      <a href="#" class="block py-1 text-negro">Accesorios</a>
+    </div>
+  </div>
+
 </nav>
 
+<main
+  id="contenido"
+  tabindex="-1"
+  class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 gap-10 lg:grid lg:grid-cols-2"
+>
+  <div class="flex flex-col justify-center items-center lg:items-start">
+    <img
+      id="detalleImagen"
+      src="imgs/producto1.png"
+      class="w-full max-w-md aspect-square object-cover rounded-xl2 shadow-suave"
+      alt="Sudadera VoidWear Classic"
+    >
+  </div>
 
-<main class="max-w-6xl mx-auto px-4 py-10 
-            grid grid-cols-1 gap-10
-            lg:grid lg:grid-cols-2">
-
-    <div class="flex flex-col justify-center items-center lg:items-start">
-        <img id="detalleImagen" src="imgs/producto1.png"
-             class="w-full max-w-md aspect-square object-cover rounded-xl2 shadow-suave"
-             alt="Producto">
+  <div class="flex flex-col justify-center space-y-5 text-negro">
+    <div class="flex justify-between">
+      <p id="detalleRating" aria-label="Valoración 4 de 5">★★★★☆ (34)</p>
     </div>
 
-    <div class="flex flex-col justify-center space-y-5 text-negro">
+    <h1 id="detalleNombre" class="text-3xl font-extrabold text-azul">Sudadera VoidWear Classic</h1>
 
-        <div class="flex justify-between">
-            <p id="detalleRating">★★★★☆ (34)</p>
-        </div>
+    <p id="detalleDescripcionCorta" class="text-lg text-negro">
+      Sudadera unisex de algodón orgánico con diseño minimalista y logo bordado.
+    </p>
 
-        <h1 id="detalleNombre" class="text-3xl font-extrabold text-azul">Sudadera VoidWear Classic</h1>
+    <p id="detallePrecio" class="text-3xl font-bold text-naranja">49,99 €</p>
 
-        <p id="detalleDescripcionCorta" class="text-lg text-negro">
-            Sudadera unisex de algodón orgánico con diseño minimalista y logo bordado.
-        </p>
-
-        <p id="detallePrecio" class="text-3xl font-bold text-naranja">49,99 €</p>
-
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-            <label class="font-medium">Talla:</label>
-            <select id="detalleTalla" class="select-talla border border-negro rounded-lg px-3 py-2 bg-blanco text-negro w-28 sm:w-32 md:w-40">
-                <option>S</option><option>M</option><option>L</option><option>XL</option>
-            </select>
-        </div>
-
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
-            <label class="font-medium">Cantidad:</label>
-            <input id="detalleCantidad" type="number" min="1" value="1"
-                   class="w-20 border border-negro rounded-lg px-3 py-2 text-center bg-blanco text-negro">
-        </div>
-
-        <button id="btnAddDetalle" class="bg-naranja text-blanco font-semibold py-3 px-6 rounded-xl2 w-full sm:w-auto">
-            Añadir al carrito
-        </button>
-
-        <p id="detalleMsg" class="text-negro font-semibold"></p>
-
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+      <label class="font-medium" for="detalleTalla">Talla:</label>
+      <select
+        id="detalleTalla"
+        class="select-talla border border-negro rounded-lg px-3 py-2 bg-blanco text-negro w-28 sm:w-32 md:w-40"
+        autocomplete="off"
+        aria-label="Seleccionar talla"
+      >
+        <option>S</option><option>M</option><option>L</option><option>XL</option>
+      </select>
     </div>
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+      <label class="font-medium" for="detalleCantidad">Cantidad:</label>
+      <input
+        id="detalleCantidad"
+        type="number"
+        min="1"
+        value="1"
+        inputmode="numeric"
+        aria-required="true"
+        class="w-20 border border-negro rounded-lg px-3 py-2 text-center bg-blanco text-negro"
+      >
+    </div>
+
+    <button
+      id="btnAddDetalle"
+      type="button"
+      class="bg-naranja text-blanco font-semibold py-3 px-6 rounded-xl2 w-full sm:w-auto"
+      aria-describedby="detalleMsg"
+    >
+      Añadir al carrito
+    </button>
+
+    <p id="detalleMsg" class="text-negro font-semibold" aria-live="polite"></p>
+  </div>
 </main>
 
+<section class="max-w-6xl mx-auto px-4 pb-16 border-t border-negro pt-10 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-6 lg:grid-cols-1">
+  <div class="p-6 bg-blanco border border-negro rounded-xl2 shadow-suave">
+    <h2 class="font-semibold text-xl mb-3 text-azul">Detalles del producto</h2>
+    <ul id="detalleLista" class="text-negro list-disc pl-5 space-y-1">
+      <li>Material: 100% algodón orgánico</li>
+      <li>Disponible en varios colores</li>
+      <li>Envío gratuito en pedidos superiores a 50€</li>
+      <li>Devoluciones gratuitas hasta 30 días</li>
+    </ul>
+  </div>
 
-
-<section class="max-w-6xl mx-auto px-4 pb-16 border-t border-negro pt-10
-                grid grid-cols-1 gap-10
-                md:grid-cols-2 md:gap-6
-                lg:grid-cols-1">
-
-    <div class="p-6 bg-blanco border border-negro rounded-xl2 shadow-suave">
-        <h2 class="font-semibold text-xl mb-3 text-azul">Detalles del producto</h2>
-        <ul id="detalleLista" class="text-negro list-disc pl-5 space-y-1">
-            <li>Material: 100% algodón orgánico</li>
-            <li>Disponible en varios colores</li>
-            <li>Envío gratuito en pedidos superiores a 50€</li>
-            <li>Devoluciones gratuitas hasta 30 días</li>
-        </ul>
-    </div>
-
-    <div class="p-6 bg-blanco border border-negro rounded-xl2 shadow-suave">
-        <h2 class="font-semibold text-xl mb-3 text-azul">Descripción del producto</h2>
-        <p id="detalleDescripcionLarga" class="text-negro leading-relaxed">
-            La Sudadera VoidWear Classic combina comodidad y estilo minimalista...
-        </p>
-    </div>
-
+  <div class="p-6 bg-blanco border border-negro rounded-xl2 shadow-suave">
+    <h2 class="font-semibold text-xl mb-3 text-azul">Descripción del producto</h2>
+    <p id="detalleDescripcionLarga" class="text-negro leading-relaxed">
+      La Sudadera VoidWear Classic combina comodidad y estilo minimalista...
+    </p>
+  </div>
 </section>
-
-
 
 <section class="max-w-6xl mx-auto px-4 pb-16 border-t border-negro pt-10">
-    <h2 class="font-semibold text-xl mb-6 text-azul">Opiniones de clientes</h2>
+  <h2 class="font-semibold text-xl mb-6 text-azul">Opiniones de clientes</h2>
 
-    <div id="opinionesContenedor" class="grid gap-4">
-        <div class="review-card mb-5">
-            <p class="font-semibold text-negro">Ana</p>
-            <p class="text-negro">★★★★☆ (34)</p>
-            <p class="mt-2 text-negro">La calidad es excelente...</p>
-        </div>
+  <div id="opinionesContenedor" class="grid gap-4" aria-live="polite">
+    <div class="review-card mb-5">
+      <p class="font-semibold text-negro">Ana</p>
+      <p class="text-negro">★★★★☆ (34)</p>
+      <p class="mt-2 text-negro">La calidad es excelente...</p>
     </div>
+  </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/accs.js"></script>
 
 <script>
   const iconoCarrito = document.getElementById("iconoCarrito");
@@ -166,23 +294,48 @@
   const menuToggle = document.getElementById("menuToggle");
   const cerrarMenu = document.getElementById("cerrarMenu");
 
-  if (menuToggle && menuLateral) {
-    menuToggle.onclick = () => menuLateral.classList.remove("-translate-x-full");
-  }
-  if (cerrarMenu && menuLateral) {
-    cerrarMenu.onclick = () => menuLateral.classList.add("-translate-x-full");
+  function openMenu(){
+    menuLateral.classList.remove("-translate-x-full");
+    menuToggle.setAttribute("aria-expanded", "true");
+    setTimeout(() => {
+      const first = menuLateral.querySelector("button, a");
+      if (first) first.focus();
+    }, 0);
   }
 
-  document.querySelectorAll(".categoria").forEach(cat => {
-    cat.addEventListener("click", () => {
-      const submenu = cat.nextElementSibling;
-      submenu.classList.toggle("hidden");
-      cat.classList.toggle("text-naranja");
+  function closeMenu(){
+    menuLateral.classList.add("-translate-x-full");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.focus();
+  }
+
+  if (menuToggle && menuLateral) {
+    menuToggle.addEventListener("click", openMenu);
+  }
+  if (cerrarMenu && menuLateral) {
+    cerrarMenu.addEventListener("click", closeMenu);
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !menuLateral.classList.contains("-translate-x-full")) {
+      closeMenu();
+    }
+  });
+
+  document.querySelectorAll(".categoria").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const controlsId = btn.getAttribute("aria-controls");
+      const submenu = document.getElementById(controlsId);
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+
+      btn.setAttribute("aria-expanded", String(!expanded));
+      if (submenu) submenu.classList.toggle("hidden");
+
+      btn.classList.toggle("text-naranja");
     });
   });
 </script>
 
 <script src="js/product-detail.js"></script>
-
 </body>
 </html>

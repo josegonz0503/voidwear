@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'inter';
-  src: url('/fuentes/Inter/Inter-VariableFont_opsz,wght.ttf');
+  font-family: "inter";
+  src: url("/fuentes/Inter/Inter-VariableFont_opsz,wght.ttf");
 }
 
 $blanco: #fffbff;
@@ -11,13 +11,14 @@ $naranja: #ff5722;
 $radius: 12px;
 $shadow: 0 3px 8px rgba(0,0,0,0.12);
 
-body {
+body{
   background: $blanco;
   font-family: "inter", sans-serif;
   color: $negro;
 }
 
-.header {
+/* HEADER */
+.header{
   width: 100%;
   height: 70px;
   background: $blanco;
@@ -30,29 +31,28 @@ body {
   z-index: 10;
 }
 
-.header-logo {
-  height: 50px;
-}
+.header-logo{ height: 50px; }
 
-.header-icon {
+.header-icon{
   width: 28px;
   height: 28px;
   cursor: pointer;
 
-  &.left {
+  &.left{
     position: absolute;
     left: 15px;
   }
 }
 
-.header-right {
+.header-right{
   position: absolute;
   right: 15px;
   display: flex;
   gap: 10px;
 }
 
-.menu-lateral {
+/* MENÚ LATERAL */
+.menu-lateral{
   width: 240px;
   height: 100%;
   background: $blanco;
@@ -65,42 +65,42 @@ body {
   transition: .3s ease;
   z-index: 20;
 
-  &.open {
+  &.open{
     transform: translateX(0);
   }
 }
 
-.cerrar-menu {
+.cerrar-menu{
   background: none;
   border: none;
   font-size: 28px;
   cursor: pointer;
 }
 
-.menu-item {
+.menu-item{
   margin-bottom: 15px;
 
-  .categoria {
+  .categoria{
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
 
-    &.active {
+    &.active{
       color: $naranja;
     }
   }
 
-  .submenu {
+  .submenu{
     margin-left: 10px;
     margin-top: 5px;
     display: none;
     flex-direction: column;
 
-    &.show {
+    &.show{
       display: flex;
     }
 
-    a {
+    a{
       padding: 4px 0;
       font-size: 16px;
       cursor: pointer;
@@ -108,255 +108,270 @@ body {
   }
 }
 
-.carrito-contenedor {
-  max-width: 1100px;
+/* CARRITO */
+.carrito-contenedor{
+  width: min(1000px, 92%);
   margin: 0 auto;
-  padding: 40px 16px 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
+  padding: 20px 0;
 
-.titulo-carrito {
-  font-size: 32px;
-  font-weight: 700;
-  color: $azul;
-  margin-bottom: 25px;
-  text-align: center;
-}
+  .btn-volver-inicio{
+    background: transparent;
+    color: $negro;
+    border: 2px solid $negro;
+    border-radius: $radius;
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: $shadow;
 
-.producto-card {
-  max-width: 900px; 
-  margin: 0 auto 16px auto;
+    &:hover{
+      background: $naranja;
+      color: $blanco;
+    }
 
-  border: 1px solid $negro;
-  border-radius: $radius;
-  padding: 16px;
-  background: $blanco;
-  box-shadow: $shadow;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    width: fit-content;
+    margin-bottom: 20px;
+    transition: all .2s ease;
 
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  grid-template-areas:
-    "titulo titulo"
-    "imagen talla"
-    "imagen color"
-    "imagen unidades"
-    "imagen subtotal";
-  gap: 12px;
-}
+    &:hover{
+      transform: translateX(-3px);
+    }
+  }
 
-.titulo {
-  grid-area: titulo;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  .titulo-carrito{
+    font-size: 2rem;
+    margin: 0 0 20px 0;
+    letter-spacing: .5px;
+  }
 
-  span {
+  #carritoProductos{
+    display: grid;
+    gap: 16px;
+  }
+
+  .producto-card{
+    background: $blanco;
+    border: 1px solid $negro;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+
+    .titulo{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+
+      span{
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+
+      .eliminar{
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+        opacity: .85;
+
+        &:hover{ opacity: 1; }
+      }
+    }
+
+    .imagen{
+      display: flex;
+      justify-content: center;
+
+      img{
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+        border-radius: $radius;
+        border: 1px solid $negro;
+      }
+    }
+
+    .talla-precio{
+      .btn-linea{
+        background: transparent;
+        color: $azul;
+        border: 1px solid $naranja;
+        border-radius: $radius;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: $shadow;
+
+        &:hover{
+          background: $naranja;
+          color: $blanco;
+        }
+
+        width: 100%;
+        text-align: left;
+      }
+    }
+
+    .color{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+
+      label{ font-weight: 600; }
+
+      .color-preview{
+        width: 22px;
+        height: 22px;
+        border: 1px solid $negro;
+        border-radius: 999px;
+        background: $blanco;
+      }
+    }
+
+    .unidades{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+
+      label{ font-weight: 600; }
+
+      input[type="number"]{
+        width: 90px;
+        padding: 10px;
+        border: 1px solid $naranja;
+        border-radius: $radius;
+        font-size: 16px;
+        outline: none;
+
+        &:focus{
+          box-shadow: $shadow;
+        }
+      }
+    }
+
+    .subtotal{
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px solid $negro;
+      padding-top: 12px;
+      margin-top: 4px;
+
+      span{ font-weight: 800; }
+    }
+  }
+
+  #totalCarrito.subtotal{
+    background: $blanco;
+    border: 1px solid $negro;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    padding: 16px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+
+    span{ font-weight: 900; }
+  }
+
+  .btn-finalizar{
+    background: $naranja;
+    color: $blanco;
+    border: 1px solid $negro;
+    border-radius: $radius;
+    padding: 14px;
     font-size: 18px;
     font-weight: 600;
-  }
-}
+    cursor: pointer;
+    box-shadow: $shadow;
 
-.eliminar {
-  background: none;
-  border: none;
-  font-size: 20px;
-  opacity: .7;
-  cursor: pointer;
+    &:hover{ opacity: .9; }
 
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.imagen {
-  grid-area: imagen;
-  width: 110px;
-  height: 110px;
-  border-radius: $radius;
-  overflow: hidden;
-
-  img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    margin-top: 16px;
   }
 }
 
-.talla-precio {
-  grid-area: talla;
-}
+@media (min-width: 768px){
+  .carrito-contenedor{
+    #carritoProductos{ gap: 20px; }
 
-.btn-linea {
-  width: 100%;
-  padding: 8px;
-  border-radius: 8px;
-  background: $blanco;
-  border: 1px solid $negro;
-  cursor: pointer;
-  font-weight: 500;
+    .producto-card{
+      grid-template-columns: 1fr 260px;
+      align-items: start;
 
-  &:hover {
-    background: $negro;
-    color: $blanco;
+      .imagen{ order: 2; }
+
+      .titulo,
+      .talla-precio,
+      .color,
+      .unidades,
+      .subtotal{
+        order: 1;
+      }
+    }
   }
 }
 
-.color {
-  grid-area: color;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* ===== FIX VISUAL: evitar estilo por defecto del navegador ===== */
 
-  .color-preview {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: $negro;
-  }
+/* Para cualquier botón que uses como "icono" o "texto" (sin caja) */
+.btn-reset-visual{
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
 }
 
-.unidades {
-  grid-area: unidades;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  input {
-    width: 60px;
-    padding: 6px;
-    border: 1px solid $negro;
-    border-radius: 8px;
-    text-align: center;
-    background: $blanco;
-  }
+/* Asegura que la categoría NO se vea como botón/selector */
+button.categoria.btn-reset-visual{
+  background: transparent;
+  border: 0;
+  padding: 0;
 }
 
-.subtotal {
-  grid-area: subtotal;
-  text-align: right;
-  font-size: 18px;
-  font-weight: 600;
-
-  span {
-    color: $azul;
-  }
+/* Botón de papelera: sin caja */
+button.eliminar.btn-reset-visual{
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
 
-#totalCarrito {
-  max-width: 900px;
-  margin: 40px auto 0;
-  text-align: left; 
-  font-size: 20px;
-  font-weight: 600;
-
-  span {
-    font-weight: 800;
-    color: $azul;
-    margin-left: 6px;
-  }
+button.eliminar img{
+  display: block;
 }
 
-.btn-finalizar {
-  max-width: 400px;
-  width: 100%;
-  background: $naranja;
-  color: $blanco;
-  font-weight: 600;
-  padding: 14px;
-  font-size: 18px;
-  border-radius: $radius;
-  cursor: pointer;
-  box-shadow: $shadow;
-
-  margin: 32px auto 0; 
-
-  &:hover {
-    opacity: .85;
-  }
+button.btn-reset-visual:focus{
+  outline: none;
 }
 
 
-@media (min-width: 768px) {
-
-  .carrito-contenedor {
-    padding: 50px 32px 80px;
-  }
-
-  .titulo-carrito {
-    font-size: 36px;
-  }
-
-  .producto-card {
-    grid-template-columns: 140px 1fr;
-    gap: 16px;
-    padding: 20px;
-  }
-
-  .imagen {
-    width: 140px;
-    height: 140px;
-  }
-
-  .titulo span {
-    font-size: 20px;
-  }
-
-  .subtotal {
-    font-size: 20px;
-  }
-
-  #totalCarrito {
-    font-size: 22px;
-  }
-
-  .btn-finalizar {
-    font-size: 20px;
-    padding: 16px;
-  }
-}
-
-
-
-@media (min-width: 1024px) {
-
-  .carrito-contenedor {
-    max-width: 1200px;
-    padding: 60px 40px 100px;
-  }
-
-  .producto-card {
-    grid-template-columns: 160px 1fr 160px;
-    grid-template-areas:
-      "imagen titulo subtotal"
-      "imagen talla unidades"
-      "imagen color unidades";
-    align-items: center;
-  }
-
-  .titulo {
-    justify-content: flex-start;
-    gap: 20px;
-  }
-
-  .subtotal {
-    text-align: right;
-    font-size: 22px;
-  }
-
-  .unidades input {
-    width: 80px;
-  }
-
-  #totalCarrito {
-    max-width: 900px;
-    font-size: 24px;
-    margin-top: 60px;
-  }
-
-  .btn-finalizar {
-    max-width: 420px;
-    font-size: 22px;
-  }
+.acc-panel.acc-desde-menu{
+  position: fixed;
+  inset: auto auto auto auto; 
+  
+  top: 1rem;
+  left: calc(240px + 1rem); 
+  
+  right: auto;
+  bottom: auto;
 }

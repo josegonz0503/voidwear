@@ -4,27 +4,109 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VoidWear - Home</title>
+    <link rel="stylesheet" href="css/accs.css">
+
   <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 
-<header>
-  <img class="icono menu-toggle" src="iconos/menu.png" alt="Menú">
 
-  <img class="logo" src="logos/normal.png" alt="Logo">
+
+
+<header>
+  <button class="menu-toggle icon-btn" type="button" aria-label="Abrir menú lateral" aria-controls="menuLateral" aria-expanded="false">
+    <img class="icono" src="iconos/menu.png" alt="Icono menu">
+  </button>
+
+  <img class="logo" src="logos/normal.png" alt="Logo VoidWear">
 
   <div class="icons-header">
-    <img class="icono" src="iconos/perfil.png" alt="Perfil">
-    <img class="icono" src="iconos/carrito.png" alt="Carrito">
+    <a href="#" class="icon-btn" aria-label="Perfil">
+      <img class="icono" src="iconos/perfil.png" alt="Icono perfil">
+    </a>
+    <a href="#" class="icon-btn" aria-label="Carrito">
+      <img class="icono" src="iconos/carrito.png" alt="Icono carrito">
+    </a>
   </div>
 </header>
 
-<nav class="menu-lateral" id="menuLateral">
-  <button class="cerrar-menu" id="cerrarMenu">×</button>
+<nav class="menu-lateral" id="menuLateral" aria-label="Menú principal">
+  <button class="cerrar-menu" id="cerrarMenu" type="button" aria-label="Cerrar menú">×</button>
 
   <div class="menu-item">
-    <p class="categoria">Mujer ▼</p>
-    <div class="submenu">
+
+    <button
+  id="openAccFromMenu"
+  type="button"
+  aria-controls="accPanel"
+  aria-expanded="false"
+>
+  Accesibilidad
+</button>
+
+<aside
+  id="accPanel"
+  class="acc-panel"
+  role="dialog"
+  aria-modal="false"
+  aria-label="Menú de accesibilidad"
+  hidden
+>
+  <div class="acc-panel__header">
+    <h2 class="acc-title">Accesibilidad</h2>
+    <button id="accClose" class="acc-close" type="button" aria-label="Cerrar accesibilidad">×</button>
+  </div>
+
+  <div class="acc-panel__body">
+    <section class="acc-section" aria-labelledby="acc-contrast-title">
+      <h3 id="acc-contrast-title">Contraste y filtros</h3>
+      <label for="accContrast">Modo</label>
+      <select id="accContrast" autocomplete="off">
+        <option value="none">Normal</option>
+        <option value="grayscale">Escala de grises</option>
+        <option value="dark">Contraste oscuro</option>
+        <option value="light">Contraste claro</option>
+        <option value="satHigh">Saturación alta</option>
+        <option value="satLow">Saturación baja</option>
+      </select>
+    </section>
+
+    <section class="acc-section" aria-labelledby="acc-text-title">
+      <h3 id="acc-text-title">Texto</h3>
+
+      <div class="acc-row">
+        <span id="accFontSizeLabel">Tamaño de letra</span>
+        <div class="acc-controls" role="group" aria-labelledby="accFontSizeLabel">
+          <button type="button" id="accFontMinus" aria-label="Disminuir tamaño de letra">A−</button>
+          <button type="button" id="accFontPlus" aria-label="Aumentar tamaño de letra">A+</button>
+        </div>
+      </div>
+
+      <label for="accLineHeight">Interlineado</label>
+      <input id="accLineHeight" type="range" min="1" max="2.2" step="0.1">
+
+      <label for="accWordSpacing">Espaciado entre palabras</label>
+      <input id="accWordSpacing" type="range" min="0" max="0.6" step="0.05">
+
+      <label for="accLetterSpacing">Espaciado entre letras</label>
+      <input id="accLetterSpacing" type="range" min="0" max="0.2" step="0.01">
+    </section>
+
+    <div class="acc-panel__footer">
+      <button id="accReset" type="button" class="acc-reset">Reset accesibilidad</button>
+      <p id="accStatus" class="sr-only" aria-live="polite"></p>
+    </div>
+  </div>
+</aside>
+
+
+
+
+    <button class="categoria" type="button" aria-expanded="false" aria-controls="submenu-mujer">
+      Mujer ▼
+    </button>
+    <div class="submenu" id="submenu-mujer" hidden>
       <a href="#">Camisetas</a>
       <a href="#">Pantalones</a>
       <a href="#">Chaquetas</a>
@@ -33,8 +115,10 @@
   </div>
 
   <div class="menu-item">
-    <p class="categoria">Hombre ▼</p>
-    <div class="submenu">
+    <button class="categoria" type="button" aria-expanded="false" aria-controls="submenu-hombre">
+      Hombre ▼
+    </button>
+    <div class="submenu" id="submenu-hombre" hidden>
       <a href="#">Camisetas</a>
       <a href="#">Pantalones</a>
       <a href="#">Chaquetas</a>
@@ -43,8 +127,10 @@
   </div>
 
   <div class="menu-item">
-    <p class="categoria">Niños ▼</p>
-    <div class="submenu">
+    <button class="categoria" type="button" aria-expanded="false" aria-controls="submenu-ninos">
+      Niños ▼
+    </button>
+    <div class="submenu" id="submenu-ninos" hidden>
       <a href="#">Camisetas</a>
       <a href="#">Pantalones</a>
       <a href="#">Chaquetas</a>
@@ -55,13 +141,18 @@
   <a class="solo-link" href="#">Ofertas</a>
 </nav>
 
-<div class="busqueda">
-  <img class="icono" src="iconos/lupa.png" alt="Buscar">
-  <input type="text" id="searchBar" placeholder="Buscar productos">
-  <img class="icono filtro-toggle" src="iconos/filtro.png" alt="Filtro">
+<div class="busqueda" role="search" aria-label="Buscar productos">
+  <img class="icono" src="iconos/lupa.png" alt="">
+
+  <label class="sr-only" for="searchBar">Buscar productos</label>
+  <input type="search" id="searchBar" placeholder="Buscar productos" autocomplete="on">
+
+  <button class="filtro-toggle icon-btn" type="button" aria-label="Abrir filtros" aria-controls="filtroPanel" aria-expanded="false">
+    <img class="icono" src="iconos/filtro.png" alt="">
+  </button>
 </div>
 
-<div class="filtro-panel" id="filtroPanel">
+<div class="filtro-panel" id="filtroPanel" aria-label="Panel de filtros" hidden>
   <div class="filtro-contenido">
     <h3>Filtrar por</h3>
 
@@ -88,7 +179,7 @@
       <label><input type="checkbox"> XL</label>
     </div>
 
-    <button id="cerrarFiltro" class="btn-cerrar-filtro">Cerrar</button>
+    <button id="cerrarFiltro" class="btn-cerrar-filtro" type="button">Cerrar</button>
   </div>
 </div>
 
@@ -120,10 +211,11 @@
       <label><input type="checkbox" class="filtro" value="xl"> XL</label>
     </div>
 
-    <button class="btn-aplicar-filtros">Aplicar Filtros</button>
+    <button class="btn-aplicar-filtros" type="button">Aplicar Filtros</button>
   </aside>
 
-  <main>
+  <main id="contenido" tabindex="-1">
+    <h1 class="sr-only">VoidWear</h1>
 
     <section class="especial">
       <div class="slider-header">
@@ -138,11 +230,11 @@
 
             <div class="titulo-color">
               <div class="titulo-producto">Camiseta Amanecer</div>
-              <img src="iconos/color.png" class="icono-color" alt="color">
-              <img src="iconos/color.png" class="icono-color" alt="color">
-              <img src="iconos/color.png" class="icono-color" alt="color">
-              <img src="iconos/color.png" class="icono-color" alt="color">
-              <img src="iconos/color.png" class="icono-color" alt="color">
+              <img src="iconos/color.png" class="icono-color" alt="Color">
+              <img src="iconos/color.png" class="icono-color" alt="Color">
+              <img src="iconos/color.png" class="icono-color" alt="Color">
+              <img src="iconos/color.png" class="icono-color" alt="Color">
+              <img src="iconos/color.png" class="icono-color" alt="Color">
             </div>
 
             <div class="slider-dots" id="dots"></div>
@@ -150,7 +242,7 @@
             <div class="slider-inferior">
               <div class="rating">★★★★☆ (34)</div>
 
-              <select class="select-talla" data-id="1">
+              <select class="select-talla" data-id="1" autocomplete="off" aria-label="Seleccionar talla Camiseta Amanecer">
                 <option value="19.99">XS - 19.99€</option>
                 <option value="21.99">S - 21.99€</option>
                 <option value="23.99">M - 23.99€</option>
@@ -158,8 +250,8 @@
                 <option value="27.99">XL - 27.99€</option>
               </select>
 
-              <button type="button">
-                <img class="add-carrito" src="iconos/add_cart.png" alt="Añadir al carrito">
+              <button type="button" aria-label="Añadir Camiseta Amanecer al carrito">
+                <img class="add-carrito" src="iconos/add_cart.png" alt="">
               </button>
             </div>
           </div>
@@ -173,7 +265,7 @@
             <div class="slider-inferior">
               <div class="rating">★★★★★ (20)</div>
 
-              <select class="select-talla" data-id="2">
+              <select class="select-talla" data-id="2" autocomplete="off" aria-label="Seleccionar talla Sudadera Nocturna">
                 <option value="29.99">XS - 29.99€</option>
                 <option value="31.99">S - 31.99€</option>
                 <option value="33.99">M - 33.99€</option>
@@ -181,8 +273,8 @@
                 <option value="37.99">XL - 37.99€</option>
               </select>
 
-              <button type="button">
-                <img class="add-carrito" src="iconos/add_cart.png" alt="Añadir al carrito">
+              <button type="button" aria-label="Añadir Sudadera Nocturna al carrito">
+                <img class="add-carrito" src="iconos/add_cart.png" alt="">
               </button>
             </div>
           </div>
@@ -196,7 +288,7 @@
             <div class="slider-inferior">
               <div class="rating">★★★★★ (12)</div>
 
-              <select class="select-talla" data-id="3">
+              <select class="select-talla" data-id="3" autocomplete="off" aria-label="Seleccionar talla Chaqueta Estrella">
                 <option value="49.99">XS - 49.99€</option>
                 <option value="52.99">S - 52.99€</option>
                 <option value="55.99">M - 55.99€</option>
@@ -204,26 +296,29 @@
                 <option value="61.99">XL - 61.99€</option>
               </select>
 
-              <button type="button">
-                <img class="add-carrito" src="iconos/add_cart.png" alt="Añadir al carrito">
+              <button type="button" aria-label="Añadir Chaqueta Estrella al carrito">
+                <img class="add-carrito" src="iconos/add_cart.png" alt="">
               </button>
             </div>
           </div>
 
         </div>
 
-        <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        <button class="prev" type="button" onclick="moveSlide(-1)" aria-label="Anterior">&#10094;</button>
+        <button class="next" type="button" onclick="moveSlide(1)" aria-label="Siguiente">&#10095;</button>
       </div>
     </section>
 
     <section class="productos">
       <h2>Novedades</h2>
-      <div class="grid-productos" id="productosGrid"></div>
+      <div class="grid-productos" id="productosGrid" aria-live="polite"></div>
     </section>
 
   </main>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/accs.js"></script>
 
 <script src="js/products-loader.js"></script>
 <script src="javascript.js"></script>
